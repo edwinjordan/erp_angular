@@ -34,15 +34,15 @@
                   <td>{{ tipe.fv_nmbrand }}</td>
                   <td>{{ tipe.fv_nmtipe }}</td>
                   <td>
-                    <p *ngIf="tipe.fc_hold =='Y'" ><button type="button" class="btn btn-success btn-sm">Hold</button></p>
-                    <p *ngIf="tipe.fc_hold =='N'" ><button type="button" class="btn btn-danger btn-sm">No Hold</button></p>
+                    <p *ngIf="tipe.fc_hold =='Y'" ><button type="button" nbButton status="success" size="small">Hold</button></p>
+                    <p *ngIf="tipe.fc_hold =='N'" ><button type="button" nbButton status="danger" size="small">No Hold</button></p>
                   </td>
                   <td >
                     <span class="edit" >
-                      <button *ngIf="u" (click)="editTipe(tipe.fc_kdtipe)" title="" data-toggle="modal" data-target="#quick-view-modal" class="btn btn-success btn-sm">Edit</button>
+                      <button *ngIf="u" (click)="editTipe(tipe.fc_kdtipe)" title="" data-toggle="modal" data-target="#quick-view-modal" nbButton status="success" size="small">Edit</button>
                     </span>
                     <span class="delete">
-                      <button *ngIf="d" (click)="DeleteTipe(tipe.fc_kdtipe)" type="button" class="btn btn-danger btn-sm">Delete</button>
+                      <button *ngIf="d" (click)="DeleteTipe(tipe.fc_kdtipe)" type="button" nbButton status="danger" size="small">Delete</button>
                     </span>
                   </td>
               </tr>
@@ -64,40 +64,31 @@
   nbSpinnerMessage="Loading....."
    style="width: 100%; height: 100%; overflow: hidden; margin: 0;">
     <nb-card-header>Form Input Tipe</nb-card-header>
-		<nb-card-body style="padding: 1rem 0 0 0;">
+		<nb-card-body style="padding: 1rem;">
 
-					<!-- <nb-list>
-            <nb-list-item> -->
+					
 
               <div class="col-md-12">
               <div class="row show-grid">
               <div class="col-md-6">
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Kode Tipe</label>
-                <div class="col-sm-9">
-                  <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Kode Tipe" [(ngModel)]="KodeTipe" [value]="KodeTipe">
-                </div>
+              <div class="form-control-group">
+                <label class="label" for="inputKodeTipe">Kode Tipe</label>
+                <input type="text" nbInput fullWidth id="inputKodeTipe" placeholder="Kode Tipe" [(ngModel)]="KodeTipe" [value]="KodeTipe">
               </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Group</label>
-                <div class="col-sm-9">
-                  <nb-select fullWidth placeholder="Pilih Group" [(ngModel)]="fc_kdgroup">
+              <div class="form-control-group">
+                  <label class="label" for="inputGroup">Group</label>
+                  <nb-select id="inputGroup" fullWidth placeholder="Pilih Group" [(ngModel)]="fc_kdgroup">
                     <nb-option *ngFor="let group of Group" value="{{group.fc_kdgroup}}">{{group.fv_nmgroup}}</nb-option>
                   </nb-select>
                 </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Brand</label>
-                <div class="col-sm-9">
-                  <nb-select fullWidth placeholder="Pilih Brand" [(ngModel)]="fc_kdbrand">
+              <div class="form-control-group">
+                  <label class="label" for="inputBrand">Brand</label>
+                  <nb-select id="inputBrand" fullWidth placeholder="Pilih Brand" [(ngModel)]="fc_kdbrand">
                     <nb-option *ngFor="let brand of Brand" value="{{brand.fc_kdbrand}}">{{brand.fv_nmbrand}}</nb-option>
                   </nb-select>
                 </div>
-              </div>
 
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label"></label>
-                <div class="col-sm-9">
+              <div class="form-control-group">
                 <button nbButton
                     type="button"
                     (click)="simpan()"
@@ -107,34 +98,26 @@
                     nbSpinnerStatus="danger"
                         >
                   Simpan
-                  <div *ngIf="!simpanLoading">
-
-                  </div>
+                  
                 </button>
-                </div>
               </div>
               </div>
               <div class="col-md-6">
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Tipe</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Tipe" [(ngModel)]="fv_nmtipe" autocomplete="off">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Hold</label>
-                  <div class="col-sm-9">
-                    <nb-select fullWidth placeholder="Pilih Status" [(ngModel)]="fc_hold">
+                <div class="form-control-group">
+                <label class="label" for="inputTipe">Tipe</label>
+                <input type="text" nbInput fullWidth id="inputTipe" placeholder="Tipe" [(ngModel)]="fv_nmtipe" autocomplete="off">
+              </div>
+                <div class="form-control-group">
+                  <label class="label" for="inputHold">Hold</label>
+                  <nb-select id="inputHold" fullWidth placeholder="Pilih Status" [(ngModel)]="fc_hold">
                       <nb-option value="Y">Hold</nb-option>
                       <nb-option value="N">No Hold</nb-option>
                     </nb-select>
-                  </div>
                 </div>
               </div>
                </div>
               </div>
-						<!-- </nb-list-item>
-          </nb-list> -->
+						
 
     </nb-card-body>
     <nb-card-footer>
@@ -148,39 +131,30 @@
   nbSpinnerSize="large"
   nbSpinnerMessage="Loading....." style="width: 100%; height: 100%; overflow: hidden; margin: 0;">
     <nb-card-header>Form Update Tipe</nb-card-header>
-		<nb-card-body style="padding: 1rem 0 0 0;">
+		<nb-card-body style="padding: 1rem;">
 
-					<!-- <nb-list>
-            <nb-list-item> -->
+					
               <div class="col-md-12">
                 <div class="row show-grid">
                 <div class="col-md-6">
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Kode Tipe</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Kode Tipe" [(ngModel)]="fc_kdtipe2" readonly>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Group</label>
-                  <div class="col-sm-9">
-                    <nb-select fullWidth placeholder="Pilih Group" [(ngModel)]="fc_kdgroup2">
+                <div class="form-control-group">
+                <label class="label" for="inputKodeTipe">Kode Tipe</label>
+                <input type="text" nbInput fullWidth id="inputKodeTipe" placeholder="Kode Tipe" [(ngModel)]="fc_kdtipe2" readonly>
+              </div>
+                <div class="form-control-group">
+                  <label class="label" for="inputGroup">Group</label>
+                  <nb-select id="inputGroup" fullWidth placeholder="Pilih Group" [(ngModel)]="fc_kdgroup2">
                       <nb-option *ngFor="let group of Group;let i = index" [value]="group.fc_kdgroup">{{group.fv_nmgroup}}</nb-option>
                     </nb-select>
-                  </div>
                 </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Brand</label>
-                  <div class="col-sm-9">
-                    <nb-select fullWidth placeholder="Pilih Brand" [(ngModel)]="fc_kdbrand2">
+                <div class="form-control-group">
+                  <label class="label" for="inputBrand">Brand</label>
+                  <nb-select id="inputBrand" fullWidth placeholder="Pilih Brand" [(ngModel)]="fc_kdbrand2">
                       <nb-option *ngFor="let brand of Brand;let i = index" [value]="brand.fc_kdbrand">{{brand.fv_nmbrand}}</nb-option>
                     </nb-select>
-                  </div>
                 </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label"></label>
-                  <div class="col-sm-9">
-                  <button nbButton
+                <div class="form-control-group">
+                <button nbButton
                       type="button"
                       (click)="update()"
                       status="success"
@@ -189,35 +163,27 @@
                       nbSpinnerStatus="danger"
                           >
                     Update
-                    <div *ngIf="!simpanLoading">
-
-                    </div>
+                    
                   </button>
-                  </div>
-                </div>
+              </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group row">
-                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Tipe</label>
-                    <div class="col-sm-9">
-                      <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Tipe" [(ngModel)]="fv_nmtipe2" autocomplete="off">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Hold</label>
-                    <div class="col-sm-9">
-                      <nb-select fullWidth placeholder="Pilih Status" [(ngModel)]="fc_hold2">
+                  <div class="form-control-group">
+                <label class="label" for="inputTipe">Tipe</label>
+                <input type="text" nbInput fullWidth id="inputTipe" placeholder="Tipe" [(ngModel)]="fv_nmtipe2" autocomplete="off">
+              </div>
+                  <div class="form-control-group">
+                  <label class="label" for="inputHold">Hold</label>
+                  <nb-select id="inputHold" fullWidth placeholder="Pilih Status" [(ngModel)]="fc_hold2">
                         <nb-option value="Y">Hold</nb-option>
                         <nb-option value="N">No Hold</nb-option>
                       </nb-select>
-                    </div>
-                  </div>
+                </div>
 
                 </div>
                  </div>
                 </div>
-            <!-- </nb-list-item>
-          </nb-list> -->
+            
     </nb-card-body>
     <nb-card-footer>
 			<button nbButton (click)="hideModelUpdate()">Tutup</button>

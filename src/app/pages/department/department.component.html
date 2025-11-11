@@ -30,15 +30,15 @@
                   <td>{{ department.f_deptid }}</td>
                   <td>{{ department.f_deptname }}</td>
                   <td>
-                    <p *ngIf="department.f_status =='Y'" ><button type="button" class="btn btn-success btn-sm">Aktif</button></p>
-                    <p *ngIf="department.f_status =='N'" ><button type="button" class="btn btn-danger btn-sm">Non Aktif</button></p>
+                    <p *ngIf="department.f_status =='Y'" ><button type="button" nbButton status="success" size="small">Aktif</button></p>
+                    <p *ngIf="department.f_status =='N'" ><button type="button" nbButton status="danger" size="small">Non Aktif</button></p>
                   </td>
                   <td >
                     <span class="edit" >
-                      <button *ngIf="u" (click)="editDepartment(department.f_deptid)" title="" data-toggle="modal" data-target="#quick-view-modal" class="btn btn-success btn-sm">Edit</button>
+                      <button *ngIf="u" (click)="editDepartment(department.f_deptid)" title="" data-toggle="modal" data-target="#quick-view-modal" nbButton status="success" size="small">Edit</button>
                     </span>
                     <span class="delete">
-                      <button *ngIf="d" (click)="DeleteDepartment(department.f_deptid)" type="button" class="btn btn-danger btn-sm">Delete</button>
+                      <button *ngIf="d" (click)="DeleteDepartment(department.f_deptid)" type="button" nbButton status="danger" size="small">Delete</button>
                     </span>
                   </td>
               </tr>
@@ -60,29 +60,22 @@
   nbSpinnerMessage="Loading....."
    style="width: 100%; height: 100%; overflow: hidden; margin: 0;">
     <nb-card-header>Form Input Department</nb-card-header>
-		<nb-card-body style="padding: 1rem 0 0 0;">
+		<nb-card-body style="padding: 1rem;">
 
-					<!-- <nb-list>
-            <nb-list-item> -->
+					
 
               <div class="col-md-12">
               <div class="row show-grid">
               <div class="col-md-6">
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Kode Department</label>
-                <div class="col-sm-9">
-                  <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Kode Divisi" [(ngModel)]="KodeDepartment" [value]="KodeDepartment" readonly>
-                </div>
+              <div class="form-control-group">
+                <label class="label" for="inputKodeDepartment">Kode Department</label>
+                <input type="text" nbInput fullWidth id="inputKodeDepartment" placeholder="Kode Divisi" [(ngModel)]="KodeDepartment" [value]="KodeDepartment" readonly>
               </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Department</label>
-                <div class="col-sm-9">
-                  <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Department" [(ngModel)]="f_deptname" autocomplete="off">
-                </div>
+              <div class="form-control-group">
+                <label class="label" for="inputDepartment">Department</label>
+                <input type="text" nbInput fullWidth id="inputDepartment" placeholder="Department" [(ngModel)]="f_deptname" autocomplete="off">
               </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label"></label>
-                <div class="col-sm-9">
+              <div class="form-control-group">
                 <button nbButton
                     type="button"
                     (click)="simpan()"
@@ -92,28 +85,22 @@
                     nbSpinnerStatus="danger"
                         >
                   Simpan
-                  <div *ngIf="!simpanLoading">
-
-                  </div>
+                  
                 </button>
-                </div>
               </div>
               </div>
               <div class="col-md-6">
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Status</label>
-                  <div class="col-sm-9">
-                    <nb-select fullWidth placeholder="Pilih Status" [(ngModel)]="f_status">
+                <div class="form-control-group">
+                  <label class="label" for="inputStatus">Status</label>
+                  <nb-select id="inputStatus" fullWidth placeholder="Pilih Status" [(ngModel)]="f_status">
                       <nb-option value="Y">Aktif</nb-option>
                       <nb-option value="N">Non Aktif</nb-option>
                     </nb-select>
-                  </div>
                 </div>
               </div>
                </div>
               </div>
-						<!-- </nb-list-item>
-          </nb-list> -->
+						
 
     </nb-card-body>
     <nb-card-footer>
@@ -127,29 +114,22 @@
   nbSpinnerSize="large"
   nbSpinnerMessage="Loading....." style="width: 100%; height: 100%; overflow: hidden; margin: 0;">
     <nb-card-header>Form Update Department</nb-card-header>
-		<nb-card-body style="padding: 1rem 0 0 0;">
+		<nb-card-body style="padding: 1rem;">
 
-					<!-- <nb-list>
-            <nb-list-item> -->
+					
               <div class="col-md-12">
                 <div class="row show-grid">
                 <div class="col-md-6">
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Kode Department</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Kode Department" [(ngModel)]="f_deptid2" readonly>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Department</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Department" [(ngModel)]="f_deptname2" autocomplete="off">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label"></label>
-                  <div class="col-sm-9">
-                  <button nbButton
+                <div class="form-control-group">
+                <label class="label" for="inputKodeDepartment">Kode Department</label>
+                <input type="text" nbInput fullWidth id="inputKodeDepartment" placeholder="Kode Department" [(ngModel)]="f_deptid2" readonly>
+              </div>
+                <div class="form-control-group">
+                <label class="label" for="inputDepartment">Department</label>
+                <input type="text" nbInput fullWidth id="inputDepartment" placeholder="Department" [(ngModel)]="f_deptname2" autocomplete="off">
+              </div>
+                <div class="form-control-group">
+                <button nbButton
                       type="button"
                       (click)="update()"
                       status="success"
@@ -158,29 +138,23 @@
                       nbSpinnerStatus="danger"
                           >
                     Update
-                    <div *ngIf="!simpanLoading">
-
-                    </div>
+                    
                   </button>
-                  </div>
-                </div>
+              </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group row">
-                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Status</label>
-                    <div class="col-sm-9">
-                      <nb-select fullWidth placeholder="Pilih Status" [(ngModel)]="f_status2">
+                  <div class="form-control-group">
+                  <label class="label" for="inputStatus">Status</label>
+                  <nb-select id="inputStatus" fullWidth placeholder="Pilih Status" [(ngModel)]="f_status2">
                         <nb-option value="Y">Aktif</nb-option>
                         <nb-option value="N">Non Aktif</nb-option>
                       </nb-select>
-                    </div>
-                  </div>
+                </div>
 
                 </div>
                  </div>
                 </div>
-            <!-- </nb-list-item>
-          </nb-list> -->
+            
     </nb-card-body>
     <nb-card-footer>
 			<button nbButton (click)="hideModelUpdate()">Tutup</button>

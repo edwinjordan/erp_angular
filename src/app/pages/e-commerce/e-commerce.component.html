@@ -1,3 +1,132 @@
-<nb-alert status="success" closable >
-  You have been successfully authenticated!
-</nb-alert>
+<div class="dashboard-grid">
+  <div class="row">
+    <div class="col-md-6">
+      <nb-card>
+        <nb-card-header>
+          <nb-icon icon="pie-chart-outline" status="primary"></nb-icon>
+          Arus Kas
+        </nb-card-header>
+        <nb-card-body class="card-chart">
+          <ngx-charts-pie-chart
+            [view]="[320,180]"
+            [results]="single"
+            [scheme]="colorScheme"
+            [labels]="true"
+            [doughnut]="false"
+            [explodeSlices]="false"
+            [gradient]="true"
+          ></ngx-charts-pie-chart>
+          <div class="action-center">
+            <button nbButton status="primary" size="medium">
+              <nb-icon icon="plus-outline"></nb-icon>
+              Buat Transaksi
+            </button>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <div class="col-md-6">
+      <nb-card>
+        <nb-card-header>
+          <nb-icon icon="trending-up-outline" status="success"></nb-icon>
+          Penjualan Terhutang
+        </nb-card-header>
+        <nb-card-body class="card-chart">
+          <ngx-charts-line-chart
+            [view]="[400,180]"
+            [scheme]="colorScheme"
+            [results]="multi"
+            [legend]="false"
+            [showXAxisLabel]="false"
+            [showYAxisLabel]="false"
+            [autoScale]="autoScale"
+            [xAxis]="true"
+            [yAxis]="true"
+            [timeline]="false"
+          ></ngx-charts-line-chart>
+          <div class="action-center">
+            <button nbButton status="success" size="medium">
+              <nb-icon icon="shopping-cart-outline"></nb-icon>
+              Buat Penjualan Baru
+            </button>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+   
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <nb-card>
+        <nb-card-header>
+          <nb-icon icon="list-outline" status="warning"></nb-icon>
+          Daftar Akun Terpantau
+        </nb-card-header>
+        <nb-card-body>
+          <ul class="tracked-list">
+            <li>
+              <a>
+                <span>
+                  <nb-icon icon="credit-card-outline" status="primary"></nb-icon>
+                  1-10001 Kas
+                </span>
+                <span class="muted">Rp. 0,00</span>
+              </a>
+            </li>
+            <li>
+              <a>
+                <span>
+                  <nb-icon icon="briefcase-outline" status="success"></nb-icon>
+                  1-10002 Rekening Bank
+                </span>
+                <span class="muted">Rp. 0,00</span>
+              </a>
+            </li>
+            <li>
+              <a>
+                <span>
+                  <nb-icon icon="file-text-outline" status="info"></nb-icon>
+                  1-10010 Piutang Usaha
+                </span>
+                <span class="muted">Rp. 0,00</span>
+              </a>
+            </li>
+          </ul>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <div class="col-md-6">
+      <nb-card>
+        <nb-card-header>
+          <nb-icon icon="bar-chart-2-outline" status="primary"></nb-icon>
+          Piutang Usaha
+        </nb-card-header>
+        <nb-card-body class="card-chart">
+          <ngx-charts-bar-vertical
+            [view]="[380,180]"
+            [scheme]="colorScheme"
+            [results]="barData"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="false"
+            [showXAxisLabel]="false"
+            [showYAxisLabel]="false"
+            [gradient]="true"
+          >
+          </ngx-charts-bar-vertical>
+          <div class="action-center">
+            <button nbButton status="primary" size="medium">
+              <nb-icon icon="checkmark-circle-outline"></nb-icon>
+              Pilih Akun
+            </button>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+  </div>
+</div>

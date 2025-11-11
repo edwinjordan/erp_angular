@@ -30,10 +30,10 @@
                   <td>{{ wilayah.fv_nmwilayah }}</td>
                   <td >
                     <span class="edit" >
-                      <button *ngIf="u" (click)="editWilayah(wilayah.fc_kdwilayah)" title="" data-toggle="modal" data-target="#quick-view-modal" class="btn btn-success btn-sm">Edit</button>
+                      <button *ngIf="u" (click)="editWilayah(wilayah.fc_kdwilayah)" title="" data-toggle="modal" data-target="#quick-view-modal" nbButton status="success" size="small">Edit</button>
                     </span>
                     <span class="delete">
-                      <button *ngIf="d" (click)="DeleteWilayah(wilayah.fc_kdwilayah)" type="button" class="btn btn-danger btn-sm">Delete</button>
+                      <button *ngIf="d" (click)="DeleteWilayah(wilayah.fc_kdwilayah)" type="button" nbButton status="danger" size="small">Delete</button>
                     </span>
                   </td>
               </tr>
@@ -55,25 +55,20 @@
   nbSpinnerMessage="Loading....."
    style="width: 100%; height: 100%; overflow: hidden; margin: 0;">
     <nb-card-header>Form Input Wilayah</nb-card-header>
-		<nb-card-body style="padding: 1rem 0 0 0;">
+		<nb-card-body style="padding: 1rem;">
 
-					<!-- <nb-list>
-            <nb-list-item> -->
+					
 
               <div class="col-md-12">
               <div class="row show-grid">
               <div class="col-md-6">
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Kode Wilayah</label>
-                <div class="col-sm-9">
-                  <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Kode Top" [(ngModel)]="KodeWilayah" [value]="KodeWilayah">
-                </div>
+              <div class="form-control-group">
+                <label class="label" for="inputKodeWilayah">Kode Wilayah</label>
+                <input type="text" nbInput fullWidth id="inputKodeWilayah" placeholder="Kode Top" [(ngModel)]="KodeWilayah" [value]="KodeWilayah">
               </div>
 
 
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label"></label>
-                <div class="col-sm-9">
+              <div class="form-control-group">
                 <button nbButton
                     type="button"
                     (click)="simpan()"
@@ -83,26 +78,20 @@
                     nbSpinnerStatus="danger"
                         >
                   Simpan
-                  <div *ngIf="!simpanLoading">
-
-                  </div>
+                  
                 </button>
-                </div>
               </div>
               </div>
               <div class="col-md-6">
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Wilayah</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Wilayah" [(ngModel)]="fv_nmwilayah" autocomplete="off">
-                  </div>
-                </div>
+                <div class="form-control-group">
+                <label class="label" for="inputWilayah">Wilayah</label>
+                <input type="text" nbInput fullWidth id="inputWilayah" placeholder="Wilayah" [(ngModel)]="fv_nmwilayah" autocomplete="off">
+              </div>
 
               </div>
                </div>
               </div>
-						<!-- </nb-list-item>
-          </nb-list> -->
+						
 
     </nb-card-body>
     <nb-card-footer>
@@ -116,24 +105,19 @@
   nbSpinnerSize="large"
   nbSpinnerMessage="Loading....." style="width: 100%; height: 100%; overflow: hidden; margin: 0;">
     <nb-card-header>Form Update Wilayah</nb-card-header>
-		<nb-card-body style="padding: 1rem 0 0 0;">
+		<nb-card-body style="padding: 1rem;">
 
-					<!-- <nb-list>
-            <nb-list-item> -->
+					
               <div class="col-md-12">
                 <div class="row show-grid">
                 <div class="col-md-6">
-                  <div class="form-group row">
-                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Kode Wilayah</label>
-                    <div class="col-sm-9">
-                      <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Kode Wilayah" [(ngModel)]="fc_kdwilayah2" >
-                    </div>
-                  </div>
+                  <div class="form-control-group">
+                <label class="label" for="inputKodeWilayah">Kode Wilayah</label>
+                <input type="text" nbInput fullWidth id="inputKodeWilayah" placeholder="Kode Wilayah" [(ngModel)]="fc_kdwilayah2" >
+              </div>
 
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label"></label>
-                  <div class="col-sm-9">
-                  <button nbButton
+                <div class="form-control-group">
+                <button nbButton
                       type="button"
                       (click)="update()"
                       status="success"
@@ -142,26 +126,20 @@
                       nbSpinnerStatus="danger"
                           >
                     Update
-                    <div *ngIf="!simpanLoading">
-
-                    </div>
+                    
                   </button>
-                  </div>
-                </div>
+              </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group row">
-                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Wilayah</label>
-                    <div class="col-sm-9">
-                      <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Wilayah" [(ngModel)]="fv_nmwilayah2" autocomplete="off">
-                    </div>
-                  </div>
+                  <div class="form-control-group">
+                <label class="label" for="inputWilayah">Wilayah</label>
+                <input type="text" nbInput fullWidth id="inputWilayah" placeholder="Wilayah" [(ngModel)]="fv_nmwilayah2" autocomplete="off">
+              </div>
 
                 </div>
                  </div>
                 </div>
-            <!-- </nb-list-item>
-          </nb-list> -->
+            
     </nb-card-body>
     <nb-card-footer>
 			<button nbButton (click)="hideModelUpdate()">Tutup</button>

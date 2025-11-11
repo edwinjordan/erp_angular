@@ -1,20 +1,9 @@
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-12">
     <nb-card>
+      <nb-card-header>Data Barang</nb-card-header>
       <nb-card-body>
-        <span class="edit" >
-          <button
-          *ngIf="c"
-          nbButton
-          (click)="openModalBarang()"
-          >Tambah</button>
-        </span>
-        <!-- <span class="edit" >
-          <button
-          nbButton
-          (click)="rerender()"
-          >Rerender</button>
-        </span> -->
+        <button *ngIf="c" nbButton status="success" (click)="openModalBarang()">Tambah Barang</button>
         <br /><br />
         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
           <thead>
@@ -54,10 +43,10 @@
                   <td>{{ barang.fv_satuan }}</td>
                   <td >
                     <span class="edit" >
-                      <button *ngIf="u" (click)="tentangInfo(barang.fn_id)" title="" data-toggle="modal" data-target="#quick-view-modal" class="btn btn-success btn-sm">Edit</button>
+                      <button *ngIf="u" (click)="tentangInfo(barang.fn_id)" title="" data-toggle="modal" data-target="#quick-view-modal" nbButton status="success" size="small">Edit</button>
                     </span>
                     <span class="delete">
-                      <button *ngIf="d" (click)="onDelete(barang.fn_id)" type="button" class="btn btn-danger btn-sm">Delete</button>
+                      <button *ngIf="d" (click)="onDelete(barang.fn_id)" type="button" nbButton status="danger" size="small">Delete</button>
                     </span>
                   </td>
               </tr>
@@ -75,25 +64,20 @@
 <div *ngIf="isPopup" style="position: absolute; top: 16vh; left: 21%; width: 76%; height: 80vh; display: flex; align-items: center; justify-content: center; z-index: 1002;">
   <nb-card style="width: 100%; height: 100%; overflow: hidden; margin: 0;">
     <nb-card-header>Form Input Barang</nb-card-header>
-		<nb-card-body style="padding: 1rem 0 0 0;">
+		<nb-card-body style="padding: 1rem;">
 
-					<!-- <nb-list>
-            <nb-list-item> -->
+					
               <form [formGroup]="barangForm" (ngSubmit)="onSubmit()">
               <div class="col-md-12">
               <div class="row show-grid">
               <div class="col-md-6">
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Kode Barang</label>
-                <div class="col-sm-9">
-                  <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Kode Post" formControlName="fc_kdstock" autocomplete="off">
-                </div>
+              <div class="form-control-group">
+                <label class="label" for="inputKodeBarang">Kode Barang</label>
+                <input type="text" nbInput fullWidth id="inputKodeBarang" placeholder="Kode Post" formControlName="fc_kdstock" autocomplete="off">
               </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Nama Barang</label>
-                <div class="col-sm-9">
-                  <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Nama Barang" formControlName="fv_namastock" autocomplete="off">
-                </div>
+              <div class="form-control-group">
+                <label class="label" for="inputNamaBarang">Nama Barang</label>
+                <input type="text" nbInput fullWidth id="inputNamaBarang" placeholder="Nama Barang" formControlName="fv_namastock" autocomplete="off">
               </div>
               <div class="form-group row">
                 <label for="inputEmail1" class="label col-sm-3 col-form-label">Foto</label>
@@ -106,71 +90,51 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Tipe</label>
-                <div class="col-sm-9">
-                  <nb-select fullWidth placeholder="Pilih Tipe" formControlName="fc_kdtipe">
+              <div class="form-control-group">
+                  <label class="label" for="inputTipe">Tipe</label>
+                  <nb-select id="inputTipe" fullWidth placeholder="Pilih Tipe" formControlName="fc_kdtipe">
                     <nb-option *ngFor="let tipe of Tipe" value="{{tipe.fc_kdtipe}}">{{tipe.fv_nmtipe}}</nb-option>
                   </nb-select>
                 </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Brand</label>
-                <div class="col-sm-9">
-                  <nb-select fullWidth placeholder="Pilih Brand" formControlName="fc_kdbrand">
+              <div class="form-control-group">
+                  <label class="label" for="inputBrand">Brand</label>
+                  <nb-select id="inputBrand" fullWidth placeholder="Pilih Brand" formControlName="fc_kdbrand">
                     <nb-option *ngFor="let brand of Brand" value="{{brand.fc_kdbrand}}">{{brand.fv_nmbrand}}</nb-option>
                   </nb-select>
                 </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Group</label>
-                <div class="col-sm-9">
-                  <nb-select fullWidth placeholder="Pilih Group" formControlName="fc_kdgroup">
+              <div class="form-control-group">
+                  <label class="label" for="inputGroup">Group</label>
+                  <nb-select id="inputGroup" fullWidth placeholder="Pilih Group" formControlName="fc_kdgroup">
                     <nb-option *ngFor="let group of Group" value="{{group.fc_kdgroup}}">{{group.fv_nmgroup}}</nb-option>
                   </nb-select>
                 </div>
+              <div class="form-control-group">
+                <label class="label" for="inputHargaJual">Harga Jual</label>
+                <input type="text" nbInput fullWidth id="inputHargaJual" placeholder="Harga Jual" formControlName="fm_hargajual" autocomplete="off">
               </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Harga Jual</label>
-                <div class="col-sm-9">
-                  <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Harga Jual" formControlName="fm_hargajual" autocomplete="off">
-                </div>
+              <div class="form-control-group">
+                <label class="label" for="inputHargaBeli">Harga Beli</label>
+                <input type="text" nbInput fullWidth id="inputHargaBeli" placeholder="Harga Beli" formControlName="fm_hargabeli" autocomplete="off">
               </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Harga Beli</label>
-                <div class="col-sm-9">
-                  <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Harga Beli" formControlName="fm_hargabeli" autocomplete="off">
-                </div>
+              <div class="form-control-group">
+                <label class="label" for="inputQtyMin">Qty Min</label>
+                <input type="text" nbInput fullWidth id="inputQtyMin" placeholder="Qty Min" formControlName="fn_qtymin" autocomplete="off">
               </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Qty Min</label>
-                <div class="col-sm-9">
-                  <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Qty Min" formControlName="fn_qtymin" autocomplete="off">
-                </div>
+              <div class="form-control-group">
+                <label class="label" for="inputQtyMax">Qty Max</label>
+                <input type="text" nbInput fullWidth id="inputQtyMax" placeholder="Qty Max" formControlName="fn_qtymax" autocomplete="off">
               </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Qty Max</label>
-                <div class="col-sm-9">
-                  <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Qty Max" formControlName="fn_qtymax" autocomplete="off">
-                </div>
+              <div class="form-control-group">
+                <label class="label" for="inputDiskonPersen">Diskon Persen</label>
+                <input type="text" nbInput fullWidth id="inputDiskonPersen" placeholder="Diskon Persen" formControlName="ff_disc_persen" autocomplete="off">
               </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Diskon Persen</label>
-                <div class="col-sm-9">
-                  <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Diskon Persen" formControlName="ff_disc_persen" autocomplete="off">
-                </div>
+              <div class="form-control-group">
+                <label class="label" for="inputDiskonRupiah">Diskon Rupiah</label>
+                <input type="text" nbInput fullWidth id="inputDiskonRupiah" placeholder="Diskon Rupiah" formControlName="ff_disc_rupiah" autocomplete="off">
               </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Diskon Rupiah</label>
-                <div class="col-sm-9">
-                  <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Diskon Rupiah" formControlName="ff_disc_rupiah" autocomplete="off">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Ongkir</label>
-                <div class="col-sm-9">
-                  <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Ongkir" formControlName="fm_ongkir" autocomplete="off">
-                </div>
+              <div class="form-control-group">
+                <label class="label" for="inputOngkir">Ongkir</label>
+                <input type="text" nbInput fullWidth id="inputOngkir" placeholder="Ongkir" formControlName="fm_ongkir" autocomplete="off">
               </div>
               <div class="form-group row">
               <label for="inputEmail1" class="label col-sm-3 col-form-label"></label>
@@ -191,26 +155,20 @@
               </div>
               </div>
               <div class="col-md-6">
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Qty PO Max</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Qty PO Max" formControlName="fn_qtyPOmax" autocomplete="off">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Qty PO Min</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Qty PO Min" formControlName="fn_qtyPOmin" autocomplete="off">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Status</label>
-                  <div class="col-sm-9">
-                     <nb-select placeholder="Pilih Status" formControlName="fc_status">
+                <div class="form-control-group">
+                <label class="label" for="inputQtyPoMax">Qty PO Max</label>
+                <input type="text" nbInput fullWidth id="inputQtyPoMax" placeholder="Qty PO Max" formControlName="fn_qtyPOmax" autocomplete="off">
+              </div>
+                <div class="form-control-group">
+                <label class="label" for="inputQtyPoMin">Qty PO Min</label>
+                <input type="text" nbInput fullWidth id="inputQtyPoMin" placeholder="Qty PO Min" formControlName="fn_qtyPOmin" autocomplete="off">
+              </div>
+                <div class="form-control-group">
+                  <label class="label" for="inputStatus">Status</label>
+                  <nb-select id="inputStatus" placeholder="Pilih Status" formControlName="fc_status">
                       <nb-option value="Y">Aktif</nb-option>
                       <nb-option value="N">Non Aktif</nb-option>
                     </nb-select>
-                  </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-3 col-form-label">Keterangan</label>
@@ -219,20 +177,17 @@
                   </div>
                 </div>
 
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Satuan</label>
-                  <div class="col-sm-9">
-                    <nb-select fullWidth placeholder="Pilih Group" formControlName="fc_kdsatuan">
+                <div class="form-control-group">
+                  <label class="label" for="inputSatuan">Satuan</label>
+                  <nb-select id="inputSatuan" fullWidth placeholder="Pilih Group" formControlName="fc_kdsatuan">
                       <nb-option *ngFor="let satuan of Satuan" value="{{satuan.fc_kdsatuan}}">{{satuan.fv_satuan}}</nb-option>
                     </nb-select>
-                  </div>
                 </div>
               </div>
                </div>
               </div>
               </form>
-						<!-- </nb-list-item>
-          </nb-list> -->
+						
 
     </nb-card-body>
     <nb-card-footer>
@@ -243,26 +198,21 @@
 <div *ngIf="openModalUpdate "  style="position: absolute; top: 16vh; left: 21%; width: 76%; height: 80vh; display: flex; align-items: center; justify-content: center; z-index: 1002;">
   <nb-card style="width: 100%; height: 100%; overflow: hidden; margin: 0;">
     <nb-card-header>Form Update Barang</nb-card-header>
-		<nb-card-body style="padding: 1rem 0 0 0;">
+		<nb-card-body style="padding: 1rem;">
 
-					<!-- <nb-list>
-            <nb-list-item> -->
+					
               <form [formGroup]="barangForm" (ngSubmit)="onSubmit()">
               <div class="col-md-12">
               <div class="row show-grid">
               <div class="col-md-6">
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Kode Barang</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Kode Post" formControlName="fc_kdstock" autocomplete="off">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Nama Barang</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Nama Barang" formControlName="fv_namastock" autocomplete="off">
-                  </div>
-                </div>
+                <div class="form-control-group">
+                <label class="label" for="inputKodeBarang">Kode Barang</label>
+                <input type="text" nbInput fullWidth id="inputKodeBarang" placeholder="Kode Post" formControlName="fc_kdstock" autocomplete="off">
+              </div>
+                <div class="form-control-group">
+                <label class="label" for="inputNamaBarang">Nama Barang</label>
+                <input type="text" nbInput fullWidth id="inputNamaBarang" placeholder="Nama Barang" formControlName="fv_namastock" autocomplete="off">
+              </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-3 col-form-label">Foto</label>
                   <div class="col-sm-9">
@@ -274,72 +224,52 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Tipe</label>
-                  <div class="col-sm-9">
-                    <nb-select fullWidth placeholder="Pilih Tipe" formControlName="fc_kdtipe">
+                <div class="form-control-group">
+                  <label class="label" for="inputTipe">Tipe</label>
+                  <nb-select id="inputTipe" fullWidth placeholder="Pilih Tipe" formControlName="fc_kdtipe">
                       <nb-option *ngFor="let tipe of Tipe;let i = index" [value]="tipe.fc_kdtipe">{{tipe.fv_nmtipe}}</nb-option>
                     </nb-select>
-                  </div>
                 </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Brand</label>
-                  <div class="col-sm-9">
-                    <nb-select fullWidth placeholder="Pilih Brand" formControlName="fc_kdbrand">
+                <div class="form-control-group">
+                  <label class="label" for="inputBrand">Brand</label>
+                  <nb-select id="inputBrand" fullWidth placeholder="Pilih Brand" formControlName="fc_kdbrand">
                       <nb-option *ngFor="let brand of Brand;let i = index" [value]="brand.fc_kdbrand">{{brand.fv_nmbrand}}</nb-option>
                     </nb-select>
-                  </div>
                 </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Group</label>
-                  <div class="col-sm-9">
-                    <nb-select fullWidth placeholder="Pilih Group" formControlName="fc_kdgroup">
+                <div class="form-control-group">
+                  <label class="label" for="inputGroup">Group</label>
+                  <nb-select id="inputGroup" fullWidth placeholder="Pilih Group" formControlName="fc_kdgroup">
                       <nb-option *ngFor="let group of Group;let i = index" [value]="group.fc_kdgroup">{{group.fv_nmgroup}}</nb-option>
                     </nb-select>
-                  </div>
                 </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Harga Jual</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Harga Jual" formControlName="fm_hargajual" autocomplete="off">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Harga Beli</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Harga Beli" formControlName="fm_hargabeli" autocomplete="off">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Qty Min</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Qty Min" formControlName="fn_qtymin" autocomplete="off">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Qty Max</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Qty Max" formControlName="fn_qtymax" autocomplete="off">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Diskon Persen</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Diskon Persen" formControlName="ff_disc_persen" autocomplete="off">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Diskon Rupiah</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Diskon Rupiah" formControlName="ff_disc_rupiah" autocomplete="off">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Ongkir</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Ongkir" formControlName="fm_ongkir" autocomplete="off">
-                  </div>
-                </div>
+                <div class="form-control-group">
+                <label class="label" for="inputHargaJual">Harga Jual</label>
+                <input type="text" nbInput fullWidth id="inputHargaJual" placeholder="Harga Jual" formControlName="fm_hargajual" autocomplete="off">
+              </div>
+                <div class="form-control-group">
+                <label class="label" for="inputHargaBeli">Harga Beli</label>
+                <input type="text" nbInput fullWidth id="inputHargaBeli" placeholder="Harga Beli" formControlName="fm_hargabeli" autocomplete="off">
+              </div>
+                <div class="form-control-group">
+                <label class="label" for="inputQtyMin">Qty Min</label>
+                <input type="text" nbInput fullWidth id="inputQtyMin" placeholder="Qty Min" formControlName="fn_qtymin" autocomplete="off">
+              </div>
+                <div class="form-control-group">
+                <label class="label" for="inputQtyMax">Qty Max</label>
+                <input type="text" nbInput fullWidth id="inputQtyMax" placeholder="Qty Max" formControlName="fn_qtymax" autocomplete="off">
+              </div>
+                <div class="form-control-group">
+                <label class="label" for="inputDiskonPersen">Diskon Persen</label>
+                <input type="text" nbInput fullWidth id="inputDiskonPersen" placeholder="Diskon Persen" formControlName="ff_disc_persen" autocomplete="off">
+              </div>
+                <div class="form-control-group">
+                <label class="label" for="inputDiskonRupiah">Diskon Rupiah</label>
+                <input type="text" nbInput fullWidth id="inputDiskonRupiah" placeholder="Diskon Rupiah" formControlName="ff_disc_rupiah" autocomplete="off">
+              </div>
+                <div class="form-control-group">
+                <label class="label" for="inputOngkir">Ongkir</label>
+                <input type="text" nbInput fullWidth id="inputOngkir" placeholder="Ongkir" formControlName="fm_ongkir" autocomplete="off">
+              </div>
               <div class="form-group row">
                 <input type="hidden" formControlName="id">
                 <label for="inputEmail1" class="label col-sm-3 col-form-label"></label>
@@ -359,26 +289,20 @@
               </div>
               </div>
               <div class="col-md-6">
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Qty PO Max</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Qty PO Max" formControlName="fn_qtyPOmax" autocomplete="off">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Qty PO Min</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Qty PO Min" formControlName="fn_qtyPOmin" autocomplete="off">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Status</label>
-                  <div class="col-sm-9">
-                     <nb-select placeholder="Pilih Status" formControlName="fc_status">
+                <div class="form-control-group">
+                <label class="label" for="inputQtyPoMax">Qty PO Max</label>
+                <input type="text" nbInput fullWidth id="inputQtyPoMax" placeholder="Qty PO Max" formControlName="fn_qtyPOmax" autocomplete="off">
+              </div>
+                <div class="form-control-group">
+                <label class="label" for="inputQtyPoMin">Qty PO Min</label>
+                <input type="text" nbInput fullWidth id="inputQtyPoMin" placeholder="Qty PO Min" formControlName="fn_qtyPOmin" autocomplete="off">
+              </div>
+                <div class="form-control-group">
+                  <label class="label" for="inputStatus">Status</label>
+                  <nb-select id="inputStatus" placeholder="Pilih Status" formControlName="fc_status">
                       <nb-option value="Y">Aktif</nb-option>
                       <nb-option value="N">Non Aktif</nb-option>
                     </nb-select>
-                  </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-3 col-form-label">Keterangan</label>
@@ -387,20 +311,17 @@
                   </div>
                 </div>
 
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Satuan</label>
-                  <div class="col-sm-9">
-                    <nb-select fullWidth placeholder="Pilih Group" formControlName="fc_kdsatuan">
+                <div class="form-control-group">
+                  <label class="label" for="inputSatuan">Satuan</label>
+                  <nb-select id="inputSatuan" fullWidth placeholder="Pilih Group" formControlName="fc_kdsatuan">
                       <nb-option *ngFor="let satuan of Satuan;let i = index" [value]="satuan.fc_kdsatuan">{{satuan.fv_satuan}}</nb-option>
                     </nb-select>
-                  </div>
                 </div>
               </div>
                </div>
               </div>
               </form>
-						<!-- </nb-list-item>
-          </nb-list> -->
+						
 
     </nb-card-body>
     <nb-card-footer>

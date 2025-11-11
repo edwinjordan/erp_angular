@@ -39,18 +39,18 @@
                   <td>{{ sales.fc_email }}</td>
                   <td>{{ sales.fc_hp }}</td>
                   <td>
-                    <p *ngIf="sales.fc_aktif =='Y'" ><button type="button" class="btn btn-success btn-sm">Aktif</button></p>
-                    <p *ngIf="sales.fc_aktif =='N'" ><button type="button" class="btn btn-danger btn-sm">Non Aktif</button></p>
+                    <p *ngIf="sales.fc_aktif =='Y'" ><button type="button" nbButton status="success" size="small">Aktif</button></p>
+                    <p *ngIf="sales.fc_aktif =='N'" ><button type="button" nbButton status="danger" size="small">Non Aktif</button></p>
                   </td>
                   <td>{{ sales.fd_tglaktif }}</td>
                   <td>{{ sales.fd_tgllahir }}</td>
                   <td>{{ sales.f_deptname }}</td>
                   <td >
                     <span class="edit" >
-                      <button *ngIf="u" (click)="editSales(sales.fc_salesid)"  title="" data-toggle="modal" data-target="#quick-view-modal" class="btn btn-success btn-sm">Edit</button>
+                      <button *ngIf="u" (click)="editSales(sales.fc_salesid)"  title="" data-toggle="modal" data-target="#quick-view-modal" nbButton status="success" size="small">Edit</button>
                     </span>
                     <span class="delete" (click)="DeleteSales(sales.fc_salesid)">
-                      <button *ngIf="d" type="button" class="btn btn-danger btn-sm">Delete</button>
+                      <button *ngIf="d" type="button" nbButton status="danger" size="small">Delete</button>
                     </span>
                   </td>
               </tr>
@@ -72,47 +72,36 @@
   nbSpinnerMessage="Loading....."
    style="width: 100%; height: 100%; overflow: hidden; margin: 0;">
     <nb-card-header>Form Input Sales</nb-card-header>
-		<nb-card-body style="padding: 1rem 0 0 0;">
+		<nb-card-body style="padding: 1rem;">
 
-					<!-- <nb-list>
-            <nb-list-item> -->
+					
 
               <div class="col-md-12">
               <div class="row show-grid">
               <div class="col-md-6">
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Kode Sales</label>
-                <div class="col-sm-9">
-                  <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Kode Sales" [(ngModel)]="KodeSales" [value]="KodeSales" readonly>
-                </div>
+              <div class="form-control-group">
+                <label class="label" for="inputKodeSales">Kode Sales</label>
+                <input type="text" nbInput fullWidth id="inputKodeSales" placeholder="Kode Sales" [(ngModel)]="KodeSales" [value]="KodeSales" readonly>
               </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Email</label>
-                <div class="col-sm-9">
-                  <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Email" [(ngModel)]="fc_email" autocomplete="off">
-                </div>
+              <div class="form-control-group">
+                <label class="label" for="inputEmail">Email</label>
+                <input type="text" nbInput fullWidth id="inputEmail" placeholder="Email" [(ngModel)]="fc_email" autocomplete="off">
               </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Status</label>
-                <div class="col-sm-9">
-                  <nb-select fullWidth placeholder="Pilih Status" [(ngModel)]="fc_aktif">
+              <div class="form-control-group">
+                  <label class="label" for="inputStatus">Status</label>
+                  <nb-select id="inputStatus" fullWidth placeholder="Pilih Status" [(ngModel)]="fc_aktif">
                     <nb-option value="Y">Aktif</nb-option>
                     <nb-option value="N">Non Aktif</nb-option>
                   </nb-select>
                 </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label">Departement</label>
-                <div class="col-sm-9">
-                  <nb-select fullWidth placeholder="Pilih Departement" [(ngModel)]="f_deptid">
+              <div class="form-control-group">
+                  <label class="label" for="inputDepartement">Departement</label>
+                  <nb-select id="inputDepartement" fullWidth placeholder="Pilih Departement" [(ngModel)]="f_deptid">
                     <nb-option *ngFor="let departement of Departement" value="{{departement.f_deptid}}">{{departement.f_deptname}}</nb-option>
                   </nb-select>
                 </div>
-              </div>
 
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-3 col-form-label"></label>
-                <div class="col-sm-9">
+              <div class="form-control-group">
                 <button nbButton
                     type="button"
                     (click)="simpan()"
@@ -122,37 +111,27 @@
                     nbSpinnerStatus="danger"
                         >
                   Simpan
-                  <div *ngIf="!simpanLoading">
-
-                  </div>
+                  
                 </button>
-                </div>
               </div>
               </div>
               <div class="col-md-6">
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Nama</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Nama" [(ngModel)]="fv_nama" autocomplete="off">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">No Hp</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="No Hp" [(ngModel)]="fc_hp" autocomplete="off">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Tanggal Lahir</label>
-                  <div class="col-sm-9">
-                    <input type="date" nbInput fullWidth id="inputEmail1" placeholder="Tanggal Lahir" [(ngModel)]="fd_tgllahir" autocomplete="off">
-                  </div>
-                </div>
+                <div class="form-control-group">
+                <label class="label" for="inputNama">Nama</label>
+                <input type="text" nbInput fullWidth id="inputNama" placeholder="Nama" [(ngModel)]="fv_nama" autocomplete="off">
+              </div>
+                <div class="form-control-group">
+                <label class="label" for="inputNoHp">No Hp</label>
+                <input type="text" nbInput fullWidth id="inputNoHp" placeholder="No Hp" [(ngModel)]="fc_hp" autocomplete="off">
+              </div>
+                <div class="form-control-group">
+                <label class="label" for="inputTanggalLahir">Tanggal Lahir</label>
+                <input type="date" nbInput fullWidth id="inputTanggalLahir" placeholder="Tanggal Lahir" [(ngModel)]="fd_tgllahir" autocomplete="off">
+              </div>
               </div>
                </div>
               </div>
-						<!-- </nb-list-item>
-          </nb-list> -->
+						
 
     </nb-card-body>
     <nb-card-footer>
@@ -167,47 +146,36 @@
   nbSpinnerSize="large"
   nbSpinnerMessage="Loading....." style="width: 100%; height: 100%; overflow: hidden; margin: 0;">
     <nb-card-header>Form Update Sales</nb-card-header>
-		<nb-card-body style="padding: 1rem 0 0 0;">
+		<nb-card-body style="padding: 1rem;">
 
-					<!-- <nb-list>
-            <nb-list-item> -->
+					
               <div class="col-md-12">
                 <div class="row show-grid">
                 <div class="col-md-6">
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Kode Sales</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Kode Sales" [(ngModel)]="fc_salesid2" readonly>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Email</label>
-                  <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Email" [(ngModel)]="fc_email2" autocomplete="off">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Status</label>
-                  <div class="col-sm-9">
-                    <nb-select fullWidth placeholder="Pilih Status" [(ngModel)]="fc_aktif2">
+                <div class="form-control-group">
+                <label class="label" for="inputKodeSales">Kode Sales</label>
+                <input type="text" nbInput fullWidth id="inputKodeSales" placeholder="Kode Sales" [(ngModel)]="fc_salesid2" readonly>
+              </div>
+                <div class="form-control-group">
+                <label class="label" for="inputEmail">Email</label>
+                <input type="text" nbInput fullWidth id="inputEmail" placeholder="Email" [(ngModel)]="fc_email2" autocomplete="off">
+              </div>
+                <div class="form-control-group">
+                  <label class="label" for="inputStatus">Status</label>
+                  <nb-select id="inputStatus" fullWidth placeholder="Pilih Status" [(ngModel)]="fc_aktif2">
                       <nb-option value="Y">Aktif</nb-option>
                       <nb-option value="N">Non Aktif</nb-option>
                     </nb-select>
-                  </div>
                 </div>
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label">Departement</label>
-                  <div class="col-sm-9">
-                    <nb-select fullWidth placeholder="Pilih Departement" [(ngModel)]="f_deptid2">
+                <div class="form-control-group">
+                  <label class="label" for="inputDepartement">Departement</label>
+                  <nb-select id="inputDepartement" fullWidth placeholder="Pilih Departement" [(ngModel)]="f_deptid2">
                       <nb-option *ngFor="let departement of Departement;let i = index" [value]="departement.f_deptid">{{departement.f_deptname}}</nb-option>
                     </nb-select>
-                  </div>
                 </div>
 
-                <div class="form-group row">
-                  <label for="inputEmail1" class="label col-sm-3 col-form-label"></label>
-                  <div class="col-sm-9">
-                  <button nbButton
+                <div class="form-control-group">
+                <button nbButton
                       type="button"
                       (click)="update()"
                       status="success"
@@ -216,37 +184,27 @@
                       nbSpinnerStatus="danger"
                           >
                     Simpan
-                    <div *ngIf="!simpanLoading">
-
-                    </div>
+                    
                   </button>
-                  </div>
-                </div>
+              </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group row">
-                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Nama</label>
-                    <div class="col-sm-9">
-                      <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Nama" [(ngModel)]="fv_nama2" autocomplete="off">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputEmail1" class="label col-sm-3 col-form-label">No Hp</label>
-                    <div class="col-sm-9">
-                      <input type="text" nbInput fullWidth id="inputEmail1" placeholder="No Hp" [(ngModel)]="fc_hp2" autocomplete="off">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Tanggal Lahir</label>
-                    <div class="col-sm-9">
-                      <input type="date" nbInput fullWidth id="inputEmail1" placeholder="Tanggal Lahir" [(ngModel)]="fd_tgllahir2" autocomplete="off">
-                    </div>
-                  </div>
+                  <div class="form-control-group">
+                <label class="label" for="inputNama">Nama</label>
+                <input type="text" nbInput fullWidth id="inputNama" placeholder="Nama" [(ngModel)]="fv_nama2" autocomplete="off">
+              </div>
+                  <div class="form-control-group">
+                <label class="label" for="inputNoHp">No Hp</label>
+                <input type="text" nbInput fullWidth id="inputNoHp" placeholder="No Hp" [(ngModel)]="fc_hp2" autocomplete="off">
+              </div>
+                  <div class="form-control-group">
+                <label class="label" for="inputTanggalLahir">Tanggal Lahir</label>
+                <input type="date" nbInput fullWidth id="inputTanggalLahir" placeholder="Tanggal Lahir" [(ngModel)]="fd_tgllahir2" autocomplete="off">
+              </div>
                 </div>
                  </div>
                 </div>
-            <!-- </nb-list-item>
-          </nb-list> -->
+            
     </nb-card-body>
     <nb-card-footer>
 			<button nbButton (click)="hideModelUpdate()">Tutup</button>

@@ -57,7 +57,6 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("divisi", JSON.stringify(data.divisi));
       localStorage.setItem("nama_area", JSON.stringify(data.nama_area));
       localStorage.setItem("nama_divisi", JSON.stringify(data.nama_divisi));
-      console.log("login after parse", data);
       if(data.success == 'success'){
         data.data['mainmenu'] = data.mainmenu;
         data.data['submenu'] = data.submenu;
@@ -74,17 +73,11 @@ export class LoginComponent implements OnInit {
         this.pesan.showToast_gagal('top-right', 'danger');
       }
     }).catch(err => {
-      console.log(err);
       setTimeout(() => this.simpanLoading = false, 3000);
       this.pesan.showToast_gagal('top-right', 'danger');
       // this.pesan.showToast("Gagal Masuk, Coba Lagi.", 'bottom', 'danger')
     })
   }
-
-  // toggleLoadingAnimation() {
-  //   this.simpanLoading = true;
-  //   setTimeout(() => this.simpanLoading = false, 3000);
-  // }
 
   readArea(){
     this.authService.getareas().then((data) => {

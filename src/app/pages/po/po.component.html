@@ -1,29 +1,38 @@
 <div class="row">
-  <div class="col-md-12">
-    <nb-card class="inline-form-card">
-      <nb-card-header>Filter Tanggal</nb-card-header>
+  <div class="col-12">
+    <nb-card>
+      <nb-card-header>Filter Purchase Order (PO)</nb-card-header>
       <nb-card-body>
-        <form class="form-inline">
-          <div class="col-md-5"> <input type="date" [(ngModel)]="tglAwal" name="tglAwal" nbInput fullWidth placeholder="Masukan Tanggal Awal"  ></div>
-          <div class="col-md-5"> <input type="date" [(ngModel)]="tglAkhir" name="tglAkhir" nbInput fullWidth placeholder="Masukan Tanggal Akhir" ></div>
-
-          <div class="col-md-2"> <button (click)="cari()" nbButton status="primary">Filter</button></div>
-        </form>
+        <div class="row">
+          <div class="col-md-5">
+            <div class="form-control-group">
+              <label class="label" for="inputTglAwal">Tanggal Awal</label>
+              <input type="date" [(ngModel)]="tglAwal" name="tglAwal" nbInput fullWidth id="inputTglAwal" placeholder="Masukan Tanggal Awal">
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="form-control-group">
+              <label class="label" for="inputTglAkhir">Tanggal Akhir</label>
+              <input type="date" [(ngModel)]="tglAkhir" name="tglAkhir" nbInput fullWidth id="inputTglAkhir" placeholder="Masukan Tanggal Akhir">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-control-group">
+              <label class="label">&nbsp;</label>
+              <button (click)="cari()" nbButton status="primary" fullWidth>Filter</button>
+            </div>
+          </div>
+        </div>
       </nb-card-body>
     </nb-card>
   </div>
 </div>
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-12">
     <nb-card>
+      <nb-card-header>Data Purchase Order (PO)</nb-card-header>
       <nb-card-body>
-        <span class="edit" >
-          <button
-          *ngIf="c"
-          nbButton
-          (click)="openModalPo()"
-          >Tambah</button>
-        </span>
+        <button *ngIf="c" nbButton status="success" (click)="openModalPo()">Tambah PO</button>
         <br /><br />
         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
           <thead>
@@ -59,238 +68,187 @@
   </div>
 </div>
 
-<div *ngIf="isPopup"  style="position: absolute; top: 14vh; left: 1%; width: 98%; height: 83vh; display: flex; align-items: center; justify-content: center; z-index: 1002;">
+<div *ngIf="isPopup" style="position: absolute; top: 14vh; left: 1%; width: 98%; height: 83vh; display: flex; align-items: center; justify-content: center; z-index: 1002;">
   <nb-card style="width: 100%; height: 100%; overflow: hidden; margin: 0;">
-    <nb-card-header>Form Input Po</nb-card-header>
-		<nb-card-body >
-	     	<div class="row">
-			  <div class="col-lg-6">
-			    <nb-card>
-			      <nb-card-header>Supplier</nb-card-header>
-			      <nb-card-body>
-			      	 <div class="row show-grid">
-				        <div class="col-md-12">
-				          <div class="form-group row">
-				            <label for="inputEmail1" class="label col-sm-4 col-form-label">Kode Supplier</label>
-				            <div class="col-sm-6">
-				              <input type="text" nbInput fullWidth id="inputEmail1" [value]="suppliere?.fc_kdsupp? suppliere?.fc_kdsupp : '-'" (click)="openModalSupplier()">
-				            </div>
-				          </div>
-				          <div class="form-group row">
-				            <label for="inputEmail1" class="label col-sm-4 col-form-label">Nama</label>
-				            <div class="col-sm-8">
-				              <input type="text" nbInput fullWidth id="inputEmail1" [value]="suppliere?.fv_nama? suppliere?.fv_nama : '-'" >
-				            </div>
-				          </div>
-				          <div class="form-group row">
-				            <label for="inputEmail1" class="label col-sm-4 col-form-label">Alamat</label>
-				            <div class="col-sm-8">
-				              <input type="text" nbInput fullWidth id="inputEmail1" [value]="suppliere?.fv_alamat? suppliere?.fv_alamat : '-'" >
-				            </div>
-				          </div>
-				          <div class="form-group row">
-				            <label for="inputEmail1" class="label col-sm-4 col-form-label">Kota</label>
-				            <div class="col-sm-8">
-				              <input type="text" nbInput fullWidth id="inputEmail1" [value]="suppliere?.fc_kota? suppliere?.fc_kota : '-'" >
-				            </div>
-				          </div>
-				        </div>
-				     </div>     
-			      </nb-card-body>
-			    </nb-card>
-			  </div>
-			  <div class="col-lg-6">
-			    <nb-card>
-			      <nb-card-header>Po</nb-card-header>
-			      <nb-card-body>
-			      	<div class="row show-grid">
-					        <div class="col-md-6">
-					          <div class="form-group row">
-					            <label for="inputEmail1" class="label col-sm-4 col-form-label">No PO</label>
-					            <div class="col-sm-8">
-					              <input type="text" nbInput fullWidth id="inputEmail1" [(ngModel)]="KodePo" [value]="KodePo">
-					            </div>
-					          </div>
-					        </div>
-					        <div class="col-md-6">
-					          <div class="form-group row">
-					            <label for="inputEmail1" class="label col-sm-4 col-form-label">Area</label>
-					            <div class="col-sm-8">
-					              <input type="text" nbInput fullWidth id="inputEmail1" [(ngModel)]="fc_kdarea" [value]="fc_kdarea">
-					            </div>
-					          </div>
-					        </div>
-					        <div class="col-md-6">
-					          <div class="form-group row">
-					            <label for="inputEmail1" class="label col-sm-4 col-form-label">Tanggal Kirim</label>
-					            <div class="col-sm-8">
-					              <input type="date" nbInput fullWidth id="inputEmail1" [(ngModel)]="tglKirim">
-					            </div>
-					          </div>
-					        </div>
-					        <div class="col-md-6">
-					          <div class="form-group row">
-					            <label for="inputEmail1" class="label col-sm-4 col-form-label">Divisi</label>
-					            <div class="col-sm-8">
-					              <input type="text" nbInput fullWidth id="inputEmail1" [(ngModel)]="fc_kddivisi" [value]="fc_kddivisi">
-					            </div>
-					          </div>
-					        </div>
-					        <div class="col-md-6">
-					          <div class="form-group row">
-					            <label for="inputEmail1" class="label col-sm-4 col-form-label">Operator</label>
-					            <div class="col-sm-8">
-					              <input type="text" nbInput fullWidth id="inputEmail1" [(ngModel)]="nama_operator" [value]="nama_operator">
-					            </div>
-					          </div>
-					        </div>
-					        <div class="col-md-6">
-					          <div class="form-group row">
-					            <label for="inputEmail1" class="label col-sm-4 col-form-label">Total Qty</label>
-					            <div class="col-sm-8">
-					              <input type="text" nbInput fullWidth id="inputEmail1" [(ngModel)]="total_qty">
-					            </div>
-					          </div>
-					        </div>
-					        <div class="col-md-6">
-					          
-					        </div>
-					        <div class="col-md-6">
-					          <div class="form-group row">
-					            <label for="inputEmail1" class="label col-sm-4 col-form-label">Total Po</label>
-					            <div class="col-sm-8">
-					              <input type="text" nbInput fullWidth id="inputEmail1" [(ngModel)]="total_po">
-					            </div>
-					          </div>
-					        </div>
-					        <div class="col-md-6">
-					          
-					        </div>
-					        <div class="col-md-6">
-					          <div class="form-group row">
-					            <label for="inputEmail1" class="label col-sm-4 col-form-label">Tax</label>
-					            <div class="col-sm-8">
-					              <input type="text" nbInput fullWidth id="inputEmail1" [(ngModel)]="tax">
-					            </div>
-					          </div>
-					        </div>
-				    </div>      
-			      </nb-card-body>
-			    </nb-card>
-			  </div>
-			  <div class="col-lg-12">
-			  	<nb-card>
-			      <nb-card-header>Input Detail PO</nb-card-header>
-			      <nb-card-body>
-			      		<div class="row show-grid">
-					        <div class="col-md-6">
-					          <div class="form-group row">
-					            <label for="inputEmail1" class="label col-sm-4 col-form-label">Kode Stock</label>
-					            <div class="col-sm-8">
-					              <input type="text" nbInput fullWidth id="inputEmail1" [value]="barange?.fc_kdstock? barange?.fc_kdstock : '-'" (click)="openModalBarang()" [(ngModel)]="fc_kdstock" autocomplete="off">
-					            </div>
-					          </div>
-					        </div>
-					        <div class="col-md-6">
-					          <div class="form-group row">
-					            <label for="inputEmail1" class="label col-sm-4 col-form-label">Qty</label>
-					            <div class="col-sm-8">
-					              <input type="text" nbInput fullWidth id="inputEmail1" [(ngModel)]="fn_qty" autocomplete="off">
-					            </div>
-					          </div>
-					        </div>
-					        <div class="col-md-6">
-					          <div class="form-group row">
-					            <label for="inputEmail1" class="label col-sm-4 col-form-label">Nama Stock</label>
-					            <div class="col-sm-8">
-					              <input type="text" nbInput fullWidth id="inputEmail1" [value]="barange?.fv_namastock? barange?.fv_namastock : '-'" [(ngModel)]="fv_namastock">
-					              <input type="hidden" nbInput fullWidth id="inputEmail1" [value]="barange?.fc_kdtipe? barange?.fc_kdtipe : '-'" [(ngModel)]="fc_kdtipe">
-					              <input type="hidden" nbInput fullWidth id="inputEmail1" [value]="barange?.fc_kdbrand? barange?.fc_kdbrand : '-'" [(ngModel)]="fc_kdbrand">
-					              <input type="hidden" nbInput fullWidth id="inputEmail1" [value]="barange?.fc_kdgroup? barange?.fc_kdgroup : '-'" [(ngModel)]="fc_kdgroup">
-					              <input type="hidden" nbInput fullWidth id="inputEmail1" [value]="barange?.fc_kdsatuan? barange?.fc_kdsatuan : '-'" [(ngModel)]="fc_kdsatuan">
-					            </div>
-					          </div>
-					        </div>
-					        <div class="col-md-6">
-					          <div class="form-group row">
-					            <label for="inputEmail1" class="label col-sm-4 col-form-label">Price</label>
-					            <div class="col-sm-8">
-					              <input type="text" nbInput fullWidth id="inputEmail1" [(ngModel)]="fm_price" autocomplete="off">
-					            </div>
-					          </div>
-					        </div>
-					        <div class="col-md-6">
-					        	<div class="form-group row">
-					        		<label for="inputEmail1" class="label col-sm-4 col-form-label"></label>
-						            <div class="col-sm-8">
-						             	<button
-								          *ngIf="c"
-								          nbButton
-								          (click)="tambahData()"
-								          >Tambahkan</button>
-						            </div>
-					        	</div> 
-					        </div>
-					        <div class="col-md-6">
-					          <div class="form-group row">
-					            <label for="inputEmail1" class="label col-sm-4 col-form-label">Total</label>
-					            <div class="col-sm-8">
-					              <input type="text" nbInput fullWidth id="inputEmail1" [value]="fm_price * fn_qty" [(ngModel)]="fm_subtot">
-					            </div>
-					          </div>
-					        </div>
-					     </div>  
-					     <table  class="table">
-					        <thead >
+    <nb-card-header>Form Input Purchase Order (PO)</nb-card-header>
+    <nb-card-body style="padding: 1rem; overflow-y: auto;">
+      <div class="row">
+        <div class="col-lg-6">
+          <nb-card accent="primary">
+            <nb-card-header>Informasi Supplier</nb-card-header>
+            <nb-card-body>
+              <div class="form-control-group">
+                <label class="label" for="inputKodeSupplier">Kode Supplier</label>
+                <input type="text" nbInput fullWidth id="inputKodeSupplier" [value]="suppliere?.fc_kdsupp? suppliere?.fc_kdsupp : '-'" (click)="openModalSupplier()" style="cursor: pointer;">
+              </div>
+              <div class="form-control-group">
+                <label class="label" for="inputNamaSupplier">Nama Supplier</label>
+                <input type="text" nbInput fullWidth id="inputNamaSupplier" [value]="suppliere?.fv_nama? suppliere?.fv_nama : '-'" readonly>
+              </div>
+              <div class="form-control-group">
+                <label class="label" for="inputAlamatSupplier">Alamat</label>
+                <input type="text" nbInput fullWidth id="inputAlamatSupplier" [value]="suppliere?.fv_alamat? suppliere?.fv_alamat : '-'" readonly>
+              </div>
+              <div class="form-control-group">
+                <label class="label" for="inputKotaSupplier">Kota</label>
+                <input type="text" nbInput fullWidth id="inputKotaSupplier" [value]="suppliere?.fc_kota? suppliere?.fc_kota : '-'" readonly>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+        <div class="col-lg-6">
+          <nb-card accent="success">
+            <nb-card-header>Detail Purchase Order</nb-card-header>
+            <nb-card-body>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-control-group">
+                    <label class="label" for="inputNoPo">No PO</label>
+                    <input type="text" nbInput fullWidth id="inputNoPo" [(ngModel)]="KodePo" [value]="KodePo" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-control-group">
+                    <label class="label" for="inputArea">Area</label>
+                    <input type="text" nbInput fullWidth id="inputArea" [(ngModel)]="fc_kdarea" [value]="fc_kdarea" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-control-group">
+                    <label class="label" for="inputTglKirim">Tanggal Kirim</label>
+                    <input type="date" nbInput fullWidth id="inputTglKirim" [(ngModel)]="tglKirim">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-control-group">
+                    <label class="label" for="inputDivisi">Divisi</label>
+                    <input type="text" nbInput fullWidth id="inputDivisi" [(ngModel)]="fc_kddivisi" [value]="fc_kddivisi" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-control-group">
+                    <label class="label" for="inputOperator">Operator</label>
+                    <input type="text" nbInput fullWidth id="inputOperator" [(ngModel)]="nama_operator" [value]="nama_operator" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-control-group">
+                    <label class="label" for="inputTotalQty">Total Qty</label>
+                    <input type="text" nbInput fullWidth id="inputTotalQty" [(ngModel)]="total_qty" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-control-group">
+                    <label class="label" for="inputTotalPo">Total PO</label>
+                    <input type="text" nbInput fullWidth id="inputTotalPo" [(ngModel)]="total_po" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-control-group">
+                    <label class="label" for="inputTax">Tax</label>
+                    <input type="text" nbInput fullWidth id="inputTax" [(ngModel)]="tax">
+                  </div>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+        <div class="col-lg-12">
+          <nb-card accent="info">
+            <nb-card-header>Input Detail Barang PO</nb-card-header>
+            <nb-card-body style="padding: 1.5rem;">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-control-group">
+                    <label class="label" for="inputKodeStock">Kode Stock</label>
+                    <input type="text" nbInput fullWidth id="inputKodeStock" [value]="barange?.fc_kdstock? barange?.fc_kdstock : '-'" (click)="openModalBarang()" [(ngModel)]="fc_kdstock" autocomplete="off" style="cursor: pointer;" placeholder="Klik untuk pilih barang">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-control-group">
+                    <label class="label" for="inputNamaStock">Nama Stock</label>
+                    <input type="text" nbInput fullWidth id="inputNamaStock" [value]="barange?.fv_namastock? barange?.fv_namastock : '-'" [(ngModel)]="fv_namastock" readonly placeholder="Nama Stock">
+                    <input type="hidden" nbInput fullWidth [value]="barange?.fc_kdtipe? barange?.fc_kdtipe : '-'" [(ngModel)]="fc_kdtipe">
+                    <input type="hidden" nbInput fullWidth [value]="barange?.fc_kdbrand? barange?.fc_kdbrand : '-'" [(ngModel)]="fc_kdbrand">
+                    <input type="hidden" nbInput fullWidth [value]="barange?.fc_kdgroup? barange?.fc_kdgroup : '-'" [(ngModel)]="fc_kdgroup">
+                    <input type="hidden" nbInput fullWidth [value]="barange?.fc_kdsatuan? barange?.fc_kdsatuan : '-'" [(ngModel)]="fc_kdsatuan">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-control-group">
+                    <label class="label" for="inputQty">Qty</label>
+                    <input type="number" nbInput fullWidth id="inputQty" [(ngModel)]="fn_qty" autocomplete="off" placeholder="Jumlah">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-control-group">
+                    <label class="label" for="inputPrice">Harga</label>
+                    <input type="number" nbInput fullWidth id="inputPrice" [(ngModel)]="fm_price" autocomplete="off" placeholder="Harga Satuan">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-control-group">
+                    <label class="label" for="inputTotal">Total</label>
+                    <input type="number" nbInput fullWidth id="inputTotal" [value]="fm_price * fn_qty" [(ngModel)]="fm_subtot" readonly placeholder="Total">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-control-group">
+                    <label class="label">&nbsp;</label>
+                    <button *ngIf="c" nbButton status="success" fullWidth (click)="tambahData()">
+                      <nb-icon icon="plus-outline"></nb-icon> Tambahkan
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <div style="margin-top: 1.5rem; overflow-x: auto;">
+              <table class="table table-bordered table-hover" style="width: 100%; min-width: 800px;">
+					        <thead style="background-color: #f7f9fc;">
 					          <tr>
-					            <th scope="col">Kode Stock</th>
-					            <th scope="col">Nama Stock</th>
-					            <th scope="col">Qty</th>
-					            <th scope="col">Price</th>
-					            <th scope="col">Subtotal</th>
-					            <th scope="col">Aksi</th>
+					            <th scope="col" style="width: 150px; padding: 12px; font-weight: 600;">Kode Stock</th>
+					            <th scope="col" style="width: 250px; padding: 12px; font-weight: 600;">Nama Stock</th>
+					            <th scope="col" style="width: 100px; padding: 12px; font-weight: 600;">Qty</th>
+					            <th scope="col" style="width: 150px; padding: 12px; font-weight: 600;">Harga</th>
+					            <th scope="col" style="width: 150px; padding: 12px; font-weight: 600;">Subtotal</th>
+					            <th scope="col" style="width: 80px; padding: 12px; font-weight: 600; text-align: center;">Aksi</th>
 					          </tr>
 					        </thead>
-					        <tbody  *ngIf="dataPoUi.length <= 0">
-					          <tr id="datakosong" >
-					            <td colspan="5" style="text-align: center; font-weight: bold;">Data Kosong</td>
+					        <tbody *ngIf="dataPoUi.length <= 0">
+					          <tr id="datakosong">
+					            <td colspan="6" style="text-align: center; padding: 24px; font-weight: 500; color: #8f9bb3;">Data Kosong</td>
 					          </tr>
 					        </tbody>
 					        <tbody *ngFor="let dd of dataPoUi; let ik = index;">
-
-					          <tr  *ngFor="let ddd of dd?.barang_po; let i = index;">
-					            <td >
-					              {{ddd.fc_kdstock}}  
+					          <tr *ngFor="let ddd of dd?.barang_po; let i = index;">
+					            <td style="padding: 12px;">{{ddd.fc_kdstock}}</td>
+					            <td style="padding: 12px;">{{ddd.fv_namastock}}</td>
+					            <td style="padding: 12px; text-align: right;">{{ddd.qty}}</td>
+					            <td style="padding: 12px; text-align: right;">{{ddd.price | number:'1.0-0'}}</td>
+					            <td style="padding: 12px; text-align: right;">{{ddd.subtotal | number:'1.0-0'}}</td>
+					            <td style="padding: 12px; text-align: center;">
+					              <button nbButton status="danger" size="small" (click)="hapusPo(ik)" ghost>
+                          <nb-icon icon="trash-2-outline"></nb-icon>
+                        </button>
 					            </td>
-					            <td >
-					              {{ddd.fv_namastock}}    
-					            </td>
-					            <td >
-					              {{ddd.qty}}
-					            </td>
-					            <td >
-					              {{ddd.price}}	
-					            </td>
-					            <td >
-					              {{ddd.subtotal}}
-					            </td>
-					            <td >
-					              <div class="hapus" (click)="hapusPo(ik)"><nb-icon icon="trash-2-outline"></nb-icon></div>
-					            </td>
-					        </tr>
-					        </tbody>
-					    </table> <br /><br />
-					     <div class="col-sm-4" style='text-align: right;'>
-					        <button type="button" class="btn btn-info btn-lg btn-block" (click)="simpanPO()" [nbSpinner]="simpanLoading" nbSpinnerStatus="danger" nbSpinnerSize="large" nbSpinnerMessage="Loading....">Simpan
-
-					        </button>
-					      </div>
-			      </nb-card-body>
-			    </nb-card>  	
-			  </div>	
-			</div>      	
-    	</nb-card-body>
-   <nb-card-footer>
+					          </tr>
+              </tbody>
+            </table>
+            </div>
+            
+            <div class="row mt-3">
+              <div class="col-md-12 text-right">
+                <button type="button" nbButton status="primary" size="large" (click)="simpanPO()" [nbSpinner]="simpanLoading" nbSpinnerStatus="danger" nbSpinnerSize="large">
+                  <nb-icon icon="save-outline"></nb-icon> Simpan PO
+                </button>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
     <button nbButton (click)="hideModalUpdate()">Tutup</button>
   </nb-card-footer>
  </nb-card>
