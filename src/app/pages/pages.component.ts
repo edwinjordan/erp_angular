@@ -47,12 +47,8 @@ export class PagesComponent {
      // this.readMenu();
      if(localStorage.getItem('user') == 'undefined'){
         const user = null;
-        console.log('undifined');
       } else {
         this.operator = JSON.parse(localStorage.getItem('user'));
-         console.log('undifined',this.operator);
-        // this.deptid = user.f_deptid;
-        console.log('f_deptid', this.operator.f_deptid);
       }
 
       menu.onItemClick().subscribe((data) => {
@@ -64,7 +60,6 @@ export class PagesComponent {
 
   ngOnInit() {
     let idne = this.operator.f_deptid;
-    console.log('idne',idne);
     this.readMenu(idne);
    }
 
@@ -89,10 +84,6 @@ export class PagesComponent {
             dataSimpan['children'].push( { title : vale.nm_submenu, link : vale.link} );
 
         }
-
-      //  dataSimpan['children'] = dataSimpan['children'].filter(item => !forDeletion.includes(item));
-
-       // console.log('dataSimpan2', dataSimpan['children'].parent);
 
         if(val.submenu.length > 0){
           // for (let vale of val.submenu) {

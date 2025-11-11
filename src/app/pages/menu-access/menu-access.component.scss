@@ -1,0 +1,166 @@
+:host {
+  .access-configuration {
+    margin-top: 20px;
+
+    nb-accordion {
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 0;
+
+    .menu-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      nb-icon {
+        font-size: 1.5rem;
+        color: #3366ff;
+      }
+
+      strong {
+        font-size: 1.1rem;
+      }
+    }
+
+    .menu-permissions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+
+      nb-checkbox {
+        margin-right: 5px;
+      }
+
+      button {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .submenu-list {
+    padding: 1rem 0;
+    
+    .submenu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      background: #f7f9fc;
+      border-radius: 8px;
+      border-left: 3px solid #3366ff;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #edf1f7;
+        transform: translateX(5px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .submenu-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 1;
+
+        nb-icon {
+          color: #8f9bb3;
+        }
+
+        span {
+          font-weight: 500;
+        }
+
+        small {
+          margin-left: 10px;
+          font-size: 0.85rem;
+        }
+      }
+
+      .submenu-permissions {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+
+        nb-checkbox {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+
+  .no-submenu {
+    padding: 1rem;
+    
+    nb-alert {
+      margin: 0;
+    }
+  }
+
+  label.label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #222b45;
+  }
+
+  .spinner-border {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+// Responsive Design
+@media (max-width: 991px) {
+  :host {
+    .menu-header {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .menu-permissions {
+        margin-top: 1rem;
+        width: 100%;
+      }
+    }
+
+    .submenu-item {
+      flex-direction: column;
+      align-items: flex-start !important;
+
+      .submenu-permissions {
+        margin-top: 1rem;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  :host {
+    .menu-permissions,
+    .submenu-permissions {
+      flex-direction: column;
+      align-items: flex-start !important;
+      gap: 10px !important;
+
+      nb-checkbox {
+        margin-bottom: 5px;
+      }
+
+      button {
+        width: 100%;
+        margin-left: 0 !important;
+        margin-top: 10px;
+      }
+    }
+  }
+}

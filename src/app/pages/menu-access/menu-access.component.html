@@ -1,0 +1,178 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-header>
+        <div class="d-flex justify-content-between align-items-center">
+          <h5>Pengaturan Hak Akses Menu</h5>
+          <button nbButton status="primary" (click)="saveAccess()" [disabled]="!selectedDepartment || loading">
+            <nb-icon icon="save-outline"></nb-icon>
+            Simpan Semua Akses
+          </button>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        
+        <!-- Department Selection -->
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <label class="label">Pilih Department:</label>
+            <nb-select 
+              fullWidth 
+              placeholder="Pilih Department" 
+              [(selected)]="selectedDepartment"
+              (selectedChange)="loadDepartmentAccess()">
+              <nb-option *ngFor="let dept of departments" [value]="dept.f_deptid">
+                {{ dept.f_deptname }}
+              </nb-option>
+            </nb-select>
+            <small class="text-muted" *ngIf="departments && departments.length > 0">
+             
+            </small><br /><br />
+            <small class="text-danger" *ngIf="!departments || departments.length === 0">
+              Tidak ada department tersedia
+            </small>
+          </div>
+          <div class="col-md-6">
+            <label class="label">&nbsp;</label>
+            <button nbButton status="info" fullWidth (click)="resetForm()">
+              <nb-icon icon="refresh-outline"></nb-icon>
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- Loading State -->
+        <div *ngIf="loading" class="text-center my-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <p class="mt-3">Memuat data...</p>
+        </div>
+
+        <!-- No Department Selected -->
+        <nb-alert *ngIf="!selectedDepartment && !loading" status="info" closable="false">
+          <nb-icon icon="info-outline"></nb-icon>
+          Silakan pilih department terlebih dahulu untuk mengatur hak akses menu.
+        </nb-alert>
+
+        <!-- Access Configuration -->
+        <div *ngIf="selectedDepartment && !loading" class="access-configuration">
+          
+          <!-- No menus available -->
+          <nb-alert *ngIf="!menus || menus.length === 0" status="warning" closable="false">
+            <nb-icon icon="alert-triangle-outline"></nb-icon>
+            Tidak ada menu tersedia. Pastikan API endpoint berjalan dengan baik.
+          </nb-alert>
+          
+          <nb-accordion multi *ngIf="menus && menus.length > 0">
+            <nb-accordion-item *ngFor="let menu of menus; let i = index" [expanded]="i === 0">
+              <nb-accordion-item-header>
+                <div class="menu-header">
+                  <div class="menu-info">
+                    <nb-icon [icon]="menu.menu_icon || 'menu-outline'"></nb-icon>
+                    <strong>{{ menu.nm_menu }}</strong>
+                  </div>
+                  <div class="menu-permissions" (click)="$event.stopPropagation()">
+                    <!-- Debug: Show actual values -->
+                    
+                    <nb-checkbox 
+                      status="primary"
+                      [checked]="menu.access?.r === 1"
+                      (checkedChange)="togglePermission(menu.access, 'r')">
+                      Read
+                    </nb-checkbox>
+                    <nb-checkbox 
+                      status="success"
+                      [checked]="menu.access?.c === 1"
+                      (checkedChange)="togglePermission(menu.access, 'c')">
+                      Create
+                    </nb-checkbox>
+                    <nb-checkbox 
+                      status="warning"
+                      [checked]="menu.access?.u === 1"
+                      (checkedChange)="togglePermission(menu.access, 'u')">
+                      Update
+                    </nb-checkbox>
+                    <nb-checkbox 
+                      status="danger"
+                      [checked]="menu.access?.d === 1"
+                      (checkedChange)="togglePermission(menu.access, 'd')">
+                      Delete
+                    </nb-checkbox>
+                    <button 
+                      nbButton 
+                      size="tiny" 
+                      status="info"
+                      (click)="toggleAllPermissions(menu.access); $event.stopPropagation()">
+                      Toggle All
+                    </button>
+                  </div>
+                </div>
+              </nb-accordion-item-header>
+              <nb-accordion-item-body>
+                
+                <!-- Submenu List -->
+                <div *ngIf="menu.submenus && menu.submenus.length > 0" class="submenu-list">
+                  <div class="submenu-item" *ngFor="let submenu of menu.submenus">
+                    <div class="submenu-info">
+                      <nb-icon icon="corner-down-right-outline"></nb-icon>
+                      <span>{{ submenu.nm_submenu }}</span>
+                      <small class="text-muted">{{ submenu.link }}</small>
+                    </div>
+                    <div class="submenu-permissions">
+                      <!-- Debug: Show actual values -->
+                      <small class="text-muted" style="margin-right: 10px;">
+                        [r:{{submenu.access?.r}} c:{{submenu.access?.c}} u:{{submenu.access?.u}} d:{{submenu.access?.d}}]
+                      </small>
+                      <nb-checkbox 
+                        status="primary"
+                        [checked]="submenu.access?.r === 1"
+                        (checkedChange)="togglePermission(submenu.access, 'r')">
+                        Read
+                      </nb-checkbox>
+                      <nb-checkbox 
+                        status="success"
+                        [checked]="submenu.access?.c === 1"
+                        (checkedChange)="togglePermission(submenu.access, 'c')">
+                        Create
+                      </nb-checkbox>
+                      <nb-checkbox 
+                        status="warning"
+                        [checked]="submenu.access?.u === 1"
+                        (checkedChange)="togglePermission(submenu.access, 'u')">
+                        Update
+                      </nb-checkbox>
+                      <nb-checkbox 
+                        status="danger"
+                        [checked]="submenu.access?.d === 1"
+                        (checkedChange)="togglePermission(submenu.access, 'd')">
+                        Delete
+                      </nb-checkbox>
+                      <button 
+                        nbButton 
+                        size="tiny" 
+                        status="info"
+                        (click)="toggleAllPermissions(submenu.access)">
+                        Toggle All
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- No Submenu -->
+                <div *ngIf="!menu.submenus || menu.submenus.length === 0" class="no-submenu">
+                  <nb-alert status="basic" closable="false">
+                    Menu ini tidak memiliki submenu
+                  </nb-alert>
+                </div>
+
+              </nb-accordion-item-body>
+            </nb-accordion-item>
+          </nb-accordion>
+
+        </div>
+
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

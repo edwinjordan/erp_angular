@@ -38,6 +38,7 @@ import { LaporanMenipisModule } from './laporan-menipis/laporan-menipis.module';
 import { LaporanRetPenjualanModule } from './laporan-retpenjualan/laporan-retpenjualan.module';
 import { LaporanHutangModule } from './laporan-hutang/laporan-hutang.module';
 import { LaporanPiutangModule } from './laporan-piutang/laporan-piutang.module';
+import { MenuAccessModule } from './menu-access/menu-access.module';
 
 @NgModule({
   imports: [
@@ -79,7 +80,8 @@ import { LaporanPiutangModule } from './laporan-piutang/laporan-piutang.module';
     LaporanMenipisModule,
     LaporanRetPenjualanModule,
     LaporanHutangModule,
-    LaporanPiutangModule
+    LaporanPiutangModule,
+    MenuAccessModule
   ],
   declarations: [
     PagesComponent,
