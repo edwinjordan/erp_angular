@@ -35,6 +35,7 @@ import { LaporanMenipisComponent } from './laporan-menipis/laporan-menipis.compo
 import { LaporanRetPenjualanComponent } from './laporan-retpenjualan/laporan-retpenjualan.component';
 import { LaporanHutangComponent } from './laporan-hutang/laporan-hutang.component';
 import { LaporanPiutangComponent } from './laporan-piutang/laporan-piutang.component';
+import { MenuAccessComponent } from './menu-access/menu-access.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 
 const routes: Routes = [{
@@ -177,6 +178,10 @@ const routes: Routes = [{
     {
       path: 'laporan-piutang',
       component: LaporanPiutangComponent,
+    },
+    {
+      path: 'menu-access',
+      component: MenuAccessComponent,
     },
     {
       path: '',

@@ -80,11 +80,9 @@ export class KoreksiStockComponent implements AfterViewInit, OnDestroy, OnInit {
   ){
     if(localStorage.getItem('user') == 'undefined'){
       const user = null;
-      console.log('undifined');
     } else {
       this.operator = JSON.parse(localStorage.getItem('user'));
       this.kode_karyawan = this.operator.fv_nama;
-      console.log('operator', this.kode_karyawan);
       this.submenu = JSON.parse(localStorage.getItem('submenu'));
       this.area = JSON.parse(localStorage.getItem('area'));
       this.divisi = JSON.parse(localStorage.getItem('divisi'));
@@ -133,6 +131,7 @@ export class KoreksiStockComponent implements AfterViewInit, OnDestroy, OnInit {
         this.inventoryService.koreksiStockGetDataAPI(dataTablesParameters).subscribe(resp => {
             that.koreksistocksUi = resp.data.filter(v => v.fc_kdarea == this.area && v.fc_kddivisi == this.divisi);
             that.koreksistocks = resp.data.filter(v => v.fc_kdarea == this.area && v.fc_kddivisi == this.divisi);
+            console.info('koreksistocks', that.koreksistocks);
             callback({
               recordsTotal: resp.recordsTotal,
               recordsFiltered: resp.recordsFiltered,

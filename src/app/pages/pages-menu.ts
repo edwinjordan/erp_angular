@@ -60,6 +60,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/setup',
   },
   {
+    title: 'Menu Access',
+    icon: 'lock-outline',
+    link: '/pages/menu-access',
+  },
+  {
     title: 'Logout',
     icon: 'alert-circle-outline',
     link: '',
